@@ -199,16 +199,16 @@ h1 .last { line-height: 65px;}
 #successPopup {
     display: none; /* Starts hidden */
     position: fixed;
-    top: 50%;
+    bottom: 3%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px 40px;
-    background-color: #4CAF50; /* Green background */
-    color: white;
-    border-radius: 8px;
+    background-color: #fff;
+    color: #000;
+    border-radius: 100px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    font-size: 1.2em;
+    font-size: 15px;
     opacity: 0;
     transition: opacity 0.5s ease;
 }
