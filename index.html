@@ -1,0 +1,335 @@
+html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Onyekachi Jeremiah - Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-r"></div>
+
+<nav id="nav">
+  <a href="#hero" class="nav-logo">JERRY<em>.</em></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-avail"><span class="avail-dot"></span>Available for projects</div>
+  <div class="hamburger" id="hbg"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mob-menu" id="mobMenu">
+  <a href="#about" onclick="closeMob()">About</a>
+  <a href="#projects" onclick="closeMob()">Work</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- <div class="hero-bg-text">Onyekachi</div> -->
+  <div class="hero-top">
+    <div class="hero-tag">Frontend Developer &amp; Builder</div>
+    <!-- <div class="hero-year">Lagos · Nigeria · 2025</div> -->
+  </div>
+  <div class="hero-main">
+    <h1>
+      <span class="first">Onyekachi</span>
+      <span class="last">Jeremiah.</span>
+    </h1>
+    <div class="hero-row">
+      <p class="hero-desc">I build <strong>interfaces that perform</strong> clean, fast, and purposeful. From e-commerce platforms to IoT dashboards, every pixel serves a reason.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-outline">View Work</a>
+        <a href="#contact" class="btn-solid">Hire Me →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <hr class="divider"> -->
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="sec-label">About</div>
+  <div class="about-grid">
+    <div class="about-left fi">
+      <div class="about-num">OJ</div>
+      <p>I'm <strong>Onyekachi Jeremiah</strong>, a Frontend Developer based in Lagos. I design and build digital products that balance aesthetic clarity with technical depth.</p>
+      <p>My work spans AI integrations and workaround, e-commerce systems, logistics platforms, IoT interfaces, and financial dashboards, always with a focus on mobile and desktop performance and seamless user experience.</p>
+      <p>I care about the details: load times, micro-interactions, API reliability, and the moment a user finds exactly what they need without friction.</p>
+      <div class="skills-list">
+        <div class="skill-row"><span>AI integration</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
+        <div class="skill-row"><span>HTML / CSS / JS</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
+        <div class="skill-row"><span>PHP </span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div></div></div>
+        <div class="skill-row"><span>API Integration</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
+        <div class="skill-row"><span>UI/UX &amp; Figma</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div></div></div>
+        <div class="skill-row"><span> Auth Systems</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div><div class="pip off"></div></div></div>
+      </div>
+    </div>
+    <div class="about-right fi fi-d2">
+      <p class="about-quote">Good frontend is invisible <em>users never notice it, they just feel it working.</em></p>
+      <div class="services-grid">
+        <div class="svc"><div class="svc-icon">⬡</div><div class="svc-title">Interface Design</div><div class="svc-desc">Clean, purposeful UI built mobile-first, accessibility-aware, and pixel-precise.</div></div>
+        <div class="svc"><div class="svc-icon">⤢</div><div class="svc-title">E-commerce Builds</div><div class="svc-desc">Full checkout flows, product galleries, and vendor dashboards with payment & logistics APIs.</div></div>
+        <div class="svc"><div class="svc-icon">◈</div><div class="svc-title">API Integration</div><div class="svc-desc">Shipbubble, PayStack, Google Auth, JWT — connecting frontend to backend reliably.</div></div>
+        <div class="svc"><div class="svc-icon">◎</div><div class="svc-title">Data &amp; Dashboards</div><div class="svc-desc">Analytics interfaces, real-time charts, and reporting tools for logistics and fintech.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="sec-label">Selected work</div>
+
+  <div id="proj-list">
+
+    <!-- 01 MAMAG -->
+    <div class="proj-item">
+      <div class="proj-n">01</div>
+      <div>
+        <div class="proj-cat">Clothing &amp; Lifestyle · E-commerce</div>
+        <div class="proj-title">MAMAG STORE</div>
+        <div class="proj-desc">A high-end clothing e-commerce platform built for scale. Custom PHP backend, advanced image gallery with modern effects and experience, and sophisticated cache-busting scripts for instant UI updates. API integration for quick payment checkout.</div>
+        <div class="proj-tags">
+          <span class="ptag">PHP</span><span class="ptag">MySQL</span>
+          <span class="ptag hl">Paystack API</span>
+          <span class="ptag">Image Gallery</span><span class="ptag">Cache Optimization</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://overite.co/mamag" target="_blank" class="plink">Live Site <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+        <video autoplay muted loop playsinline width="100%">
+          <source src="video/mamag.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- 02 TRENDSHOP -->
+    <div class="proj-item">
+      <div class="proj-n">02</div>
+      <div>
+        <div class="proj-cat">AI FINTECH · Mobile and Desktop </div>
+        <div class="proj-title">Cogitto AI Banking</div>
+        <div class="proj-desc">A sophisticated financial interface bridging the gap between physical hardware and digital intelligence through the <strong>Home Banking Device (HBD)</strong>. This platform merges high-frequency ambient banking with secure, localized processing for a seamless user experience.</div>
+        <div class="proj-tags">
+          <span class="ptag">Javascript</span>
+          <span class="ptag hl">Auth</span>
+          <span class="ptag hl">Google Login</span>
+          <span class="ptag">Mobile-First</span><span class="ptag">Social UI</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="plink">Live Site <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+         <video autoplay muted loop playsinline width="100%">
+          <source src="video/cognitto.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- 03 DELIVA -->
+    <div class="proj-item">
+      <div class="proj-n">03</div>
+      <div>
+        <div class="proj-cat">Online Courses &amp; Education Chain</div>
+        <div class="proj-title">PDFarms Online Study</div>
+        <div class="proj-desc">A specialized educational marketplace and gamified acquisition system. Real-time ticket allocation and automated raffle entry generation upon course enrollment. Complex backend logic managing multi-tier reward pools, secure drawing algorithms, and user entitlement state across the full learning lifecycle.</div>
+        <div class="proj-tags">
+          <span class="ptag">Javascript</span>
+          <span class="ptag hl">Multi-carrier API</span>
+          <span class="ptag">State Management</span>
+          <span class="ptag">Label Generation</span><span class="ptag">Real-Time</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="plink">Live App <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+        <video autoplay muted loop playsinline width="100%">
+          <source src="video/pdf.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- 04 POWERUP -->
+
+     <div class="proj-item">
+      <div class="proj-n">01</div>
+      <div>
+        <div class="proj-cat">Hardware &amp; Digital Billboard</div>
+        <div class="proj-title">NeoScreens</div>
+        <div class="proj-desc">A high-performance digital-out-of-home (DOOH) interface for real-time billboard orchestration and asset management. Features a dynamic inventory dashboard with a Javascriptive geographic visualization engine that changes state based on live ad performance and screen health.</div>
+        <div class="proj-tags">
+          <span class="ptag">PHP</span><span class="ptag">MySQL</span>
+          <span class="ptag hl">Multi-carrier API</span>
+          <span class="ptag">Image Gallery</span><span class="ptag">Cache Optimization</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://overite.co/mamag" target="_blank" class="plink">Live Site <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+        <video autoplay muted loop playsinline width="100%">
+          <source src="video/neoscreens.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+
+    <!-- 05 AI BANKING DASHBOARD -->
+    <div class="proj-item">
+      <div class="proj-n">05</div>
+      <div>
+        <div class="proj-cat">Fintech &amp; Online, Electricity Payment</div>
+        <div class="proj-title">PowerUp</div>
+        <div class="proj-desc">A real-time energy and fintech dashboard. Seamless prepaid and postpaid loading via the dashboard and live balance tracking without hardware, integrated with money transfers and detailed utility analytics for clear consumption insights.</div>
+        <div class="proj-tags">
+          <span class="ptag">JavaScript</span>
+          <span class="ptag hl">Data Visualization</span>
+          <span class="ptag">Real-Time Charts</span>
+          <span class="ptag">Fintech UI</span><span class="ptag">SME</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="plink">Live Demo <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+         <video autoplay muted loop playsinline width="100%">
+          <source src="video/powerup.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- 06 MAMATEES -->
+    <div class="proj-item">
+      <div class="proj-n">06</div>
+      <div>
+        <div class="proj-cat">IOT &amp; Automation · Smart Home</div>
+        <div class="proj-title">Vera</div>
+        <div class="proj-desc">A futuristic smart home command center. An AI-integrated IoT dashboard featuring minimalist controls for real-time device automation and voice-responsive interfaces, optimized for seamless connectivity and low-latency performance.</div>
+        <div class="proj-tags">
+          <span class="ptag">HTML / CSS / JS / PHP ...</span>
+          <span class="ptag hl">Conversion-Optimized</span>
+          <span class="ptag">Mobile-First</span>
+          <span class="ptag">Lagos Market</span>
+        </div>
+        <div class="proj-links">
+          <a href="#" class="plink">Live Site <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+        <video autoplay muted loop playsinline width="100%">
+          <source src="video/vera.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+     <div class="proj-item">
+      <div class="proj-n">07</div>
+      <div>
+        <div class="proj-cat">Food &amp; Lifestyle · </div>
+        <div class="proj-title">MAMATEESAUCES</div>
+        <div class="proj-desc">A premium culinary e-commerce platform for Mamatee Sauces. Custom PHP backend featuring high-resolution product galleries, instant UI updates via advanced cache-busting scripts, and a streamlined API integration for a fast, secure checkout experience.</div>
+        <div class="proj-tags">
+          <span class="ptag">JS / TAILWINDCSS</span><span class="ptag">MySQL</span>
+          <span class="ptag hl">Paystack API</span>
+          <span class="ptag">Image Gallery</span><span class="ptag">Cache Optimization</span>
+        </div>
+        <div class="proj-links">
+          <a href="https://mamateesauces.com" target="_blank" class="plink">Live Site <span class="ar">→</span></a>
+          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img">
+        <video autoplay muted loop playsinline width="100%">
+          <source src="video/mamatee.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- OTHER WORKS -->
+    <div class="proj-item" style="opacity:1;transform:none;">
+      <div class="proj-n" style="-webkit-text-stroke-color:rgba(17,17,16,.06);">+</div>
+      <div>
+        <div class="proj-cat">More work</div>
+        <div class="proj-title" style="font-style:italic;color:var(--ink-3)">Other Projects</div>
+        <div class="proj-desc" style="color:var(--ink-3)">Additional client work, experiments, and builds. Some are under NDA. Reach out directly to discuss scope and timeline.</div>
+        <div class="proj-links">
+          <a href="#contact" class="plink">Get in touch <span class="ar">→</span></a>
+        </div>
+      </div>
+      <div class="proj-img proj-placeholder" style="background:var(--bg-2);display:flex;">
+        <span>On request</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="sec-label">Contact</div>
+  <div class="contact-grid">
+    <div class="fi">
+      <h2 class="contact-h">Let's build something <em>worth using.</em></h2>
+      <p class="contact-sub">Open to freelance, contract, and full-time roles. Whether you need a frontend built from scratch or an existing product improved — let's talk.</p>
+      <a href="mailto:jeremiahluis4life@gmail.com" class="contact-email">jeremiahluis4life@gmail.com</a>
+      <div class="contact-links">
+        <a href="https://wa.me/+2349018654747" target="_blank" class="clink"><span>WhatsApp</span><span class="clink-arr">↗</span></a>
+        <a href="https://www.linkedin.com/in/jerry-luis-55473226b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="clink"><span>LinkedIn</span><span class="clink-arr">↗</span></a>
+        <a href="mailto:jeremiahluis4life@gmail.com" target="_blank" class="clink"><span>Gmail</span><span class="clink-arr">↗</span></a>
+        <!-- <a href="#" class="clink"><span>Download CV</span><span class="clink-arr">↓</span></a> -->
+      </div>
+    </div>
+    <div class="fi fi-d2">
+      <form action="" id="contactForm">
+        <div class="contact-form">
+          <div class="fg"><label class="flabel">Name</label><input type="text" id="name" name="name" class="finput" placeholder="Your name"></div>
+          <div class="fg"><label class="flabel">Email</label><input type="email" id="email" name="email" class="finput" placeholder="your@email.com"></div>
+          <div class="fg"><label class="flabel">Project Type</label><input type="text" id="project" name="project" class="finput" placeholder="e.g., Website redesign, React app, E-commerce site"></div>
+          <div class="fg"><label class="flabel">Project brief</label><textarea class="ftextarea" id="message" name="message" placeholder="Tell me about your project…"></textarea></div>
+          <button type="submit" class="btn-send">Send Message →</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+<div id="successPopup">
+    Message sent successfully! Thank you. ✅
+</div>
+<footer>
+  <span>© 2025 onyekachi Jeremiah</span>
+  <span class="gold">Lagos, Nigeria 🇳🇬</span>
+  <a href="#hero">Back to top ↑</a>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
