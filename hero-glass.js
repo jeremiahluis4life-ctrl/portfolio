@@ -28,7 +28,7 @@ async function init() {
   const phoneDev = Math.min(innerWidth, innerHeight) < 700;
   // sharp on high-density phone screens; never drops below dprFloor
   let dprCap = Math.min(devicePixelRatio || 1, phoneDev ? 2.5 : 2);
-  const dprFloor = Math.min(devicePixelRatio || 1, 1.5);
+  const dprFloor = Math.min(devicePixelRatio || 1, 2);
   renderer.setPixelRatio(dprCap);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -327,7 +327,7 @@ async function init() {
   /* ---------------- 3D portrait: photo + hand-modelled depth ---------------- */
   const texLoader = new THREE.TextureLoader();
   const loadTex = url => new Promise(res => texLoader.load(url, res, undefined, () => res(null)));
-  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp'), loadTex('img/me-depth.webp')]);
+  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp?v=20261110c'), loadTex('img/me-depth.webp?v=20261110c')]);
   const me = { on: !!(meTex && meDepth), g: new THREE.Group(), show: 0, cx: 0, headY: 0, Hp: 1 };
   const meU = {
     uMap: { value: meTex }, uDepth: { value: meDepth }, uAmp: { value: 100 }, uSize: { value: new THREE.Vector2(1, 1) },

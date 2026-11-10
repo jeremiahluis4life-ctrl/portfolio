@@ -276,12 +276,13 @@ void main(){
   let camS = 2, focusI = -1, fk = 0, fkT = 0, nearI = 0, hoverI = -1, dirty = true, inView = false;
   let yaw = 0, pitch = 0, dragYaw = 0, dragPitch = 0, mx = 0, my = 0, smx = 0, smy = 0;
   let eye = [0, 0, 0], fwd = [0, 0, -1], right = [1, 0, 0], up = [0, 1, 0];
-  const FOV = 62 * Math.PI / 180;
+  let FOV = 62 * Math.PI / 180, autoYaw = 0;
   const sStart = 3, sEnd = S0 + (N - 1) * GAP + 6;
   const lenis = () => window.__lenis || null;
 
   const measure = () => {
     vw = innerWidth; vh = innerHeight;
+    FOV = (vw / vh < 1 ? 80 : 62) * Math.PI / 180;   // wider view on portrait phones
     const h = Math.round(vh * (1.6 + N * .62));
     work.style.height = h + 'px';
     top = work.getBoundingClientRect().top + window.scrollY;
@@ -404,7 +405,15 @@ void main(){
     fk = lerp(fk, fkT, clamp(k * 2.4, 0, 1));
     if (!down) { dragYaw *= 1 - clamp(k * 1.4, 0, 1); dragPitch *= 1 - clamp(k * 1.4, 0, 1); }
     smx = lerp(smx, mx, clamp(k * 2, 0, 1)); smy = lerp(smy, my, clamp(k * 2, 0, 1));
-    yaw = dragYaw - smx * .16 * (1 - fk); pitch = dragPitch - smy * .08 * (1 - fk);
+    // portrait screens: turn gently toward the next project so side panels come into view
+    let ay = 0;
+    if (vw / vh < 1) {
+      let nb = null, bd = 1e9;
+      panels.forEach(pn => { const d = pn.s - camS; if (d > 1.2 && d < bd) { bd = d; nb = pn; } });
+      if (nb && bd < 15) ay = -nb.side * Math.atan2(HW * .95, bd) * .8 * clamp((15 - bd) / 7, 0, 1);
+    }
+    autoYaw = lerp(autoYaw, ay, clamp(k * 1.1, 0, 1));
+    yaw = dragYaw + autoYaw * (1 - fk) - smx * .16 * (1 - fk); pitch = dragPitch - smy * .08 * (1 - fk);
 
     // walking camera
     const fr = frameAt(camS);
