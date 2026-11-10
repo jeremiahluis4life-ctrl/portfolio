@@ -2,332 +2,505 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Onyekachi Jeremiah - Frontend Developer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Onyekachi Jeremiah — Frontend Developer</title>
+<meta name="description" content="Onyekachi Jeremiah is a Lagos-based frontend developer and creative technologist building fast, 3D, motion-rich web experiences.">
+<meta name="theme-color" content="#07080b">
+<meta property="og:title" content="Onyekachi Jeremiah — Frontend Developer">
+<meta property="og:description" content="Fast, 3D, motion-rich web experiences from Lagos.">
+<meta property="og:image" content="img/work/nuright.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='18' fill='%23111110'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-style='italic' font-size='30' fill='%23c8a96e'%3Eoj%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Geist+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://unpkg.com" crossorigin>
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js" crossorigin>
+<link rel="preload" as="image" href="img/me.webp" type="image/webp" crossorigin>
+<link rel="preload" as="image" href="img/me-depth.webp" type="image/webp" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@400;500&family=Inter:wght@400..700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Geist+Mono:wght@400;500&family=Inter:wght@400..700&display=swap"></noscript>
+<script src="theme.js"></script>
 <link rel="stylesheet" href="style.css">
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" async></script>
+<script src="script.js" defer></script>
+<script src="gallery.js" defer></script>
+<script src="sections.js" defer></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"}}</script>
+<script type="module" src="hero-glass.js"></script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="lg-refract" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+    <feImage x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27 preserveAspectRatio=%27none%27%3E%3Cdefs%3E%3ClinearGradient id=%27r%27%3E%3Cstop offset=%270%27 stop-color=%27%23000%27/%3E%3Cstop offset=%271%27 stop-color=%27%23f00%27/%3E%3C/linearGradient%3E%3ClinearGradient id=%27g%27 x2=%270%27 y2=%271%27%3E%3Cstop offset=%270%27 stop-color=%27%23000%27/%3E%3Cstop offset=%271%27 stop-color=%27%230f0%27/%3E%3C/linearGradient%3E%3Cfilter id=%27b%27%3E%3CfeGaussianBlur stdDeviation=%275%27/%3E%3C/filter%3E%3C/defs%3E%3Crect width=%27100%27 height=%27100%27 fill=%27url(%23r)%27/%3E%3Crect width=%27100%27 height=%27100%27 fill=%27url(%23g)%27 style=%27mix-blend-mode:screen%27/%3E%3Crect x=%2712%27 y=%2712%27 width=%2776%27 height=%2776%27 rx=%2718%27 fill=%27rgb(128,128,0)%27 filter=%27url(%23b)%27/%3E%3C/svg%3E"/>
+    <feDisplacementMap in="SourceGraphic" in2="map" scale="28" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
 
-<div id="cur"></div>
-<div id="cur-r"></div>
+<a class="skip" href="#work">Skip to work</a>
 
-<nav id="nav">
-  <a href="#hero" class="nav-logo">JERRY<em>.</em></a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Work</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-avail"><span class="avail-dot"></span>Available for projects</div>
-  <div class="hamburger" id="hbg"><span></span><span></span><span></span></div>
-</nav>
+<!-- NAV -->
+<header class="nav lg" id="nav">
+  <a href="#top" class="logo" aria-label="Back to top">
+    <span class="logo-mark">oj</span><span class="logo-word">Jerry<em>.</em></span>
+  </a>
+  <nav class="nav-links" aria-label="Main">
+    <a href="#about" data-i="01">About</a>
+    <a href="#work" data-i="02">Work</a>
+    <a href="#stack" data-i="03">Stack</a>
+    <a href="#contact" data-i="04">Contact</a>
+  </nav>
+  <div class="nav-right">
+    <button class="theme-btn lg lg-jelly" type="button" data-theme-toggle aria-label="Switch to dark mode"><span class="tb-icon" aria-hidden="true"></span></button>
+    <span class="status lg lg-jelly"><span class="pulse"></span>Available for projects</span>
+    <button class="menu-btn lg lg-dark lg-jelly" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobMenu"><span></span><span></span></button>
+  </div>
+</header>
 
-<div class="mob-menu" id="mobMenu">
-  <a href="#about" onclick="closeMob()">About</a>
-  <a href="#projects" onclick="closeMob()">Work</a>
-  <a href="#contact" onclick="closeMob()">Contact</a>
+<div class="mob-menu" id="mobMenu" aria-hidden="true">
+  <a href="#about"><i>01</i>About</a>
+  <a href="#work"><i>02</i>Work</a>
+  <a href="#stack"><i>03</i>Stack</a>
+  <a href="#contact"><i>04</i>Contact</a>
+  <p class="mob-foot">Lagos · <span data-clock>--:--</span> WAT</p>
 </div>
 
-<!-- HERO -->
-<section id="hero">
-  <!-- <div class="hero-bg-text">Onyekachi</div> -->
-  <div class="hero-top">
-    <div class="hero-tag">Frontend Developer &amp; Builder</div>
-    <!-- <div class="hero-year">Lagos · Nigeria · 2025</div> -->
+<main>
+
+<!-- HERO — smoked-glass shards (hero-glass.js); the DOM below is also the no-WebGL version -->
+<section class="hero gh" id="top">
+  <canvas id="glass" aria-hidden="true"></canvas>
+
+  <div class="gh-block" id="ghBlock">
+    <div class="gh-nav" id="ghNav">
+      <a class="gh-mark" href="#top" data-paint="mark" aria-label="Onyekachi Jeremiah, back to top"><span class="gh-sq" aria-hidden="true"></span><span class="gh-brand"><span class="gh-word" data-paint="text" data-color="#f2f2f4">Onyekachi Jeremiah</span><span class="gh-role" data-paint="text" data-color="rgba(255,255,255,.4)">Frontend developer</span></span></a>
+      <nav class="gh-links" aria-label="Hero">
+        <a href="#about"><span class="gh-i" data-paint="text" data-color="rgba(200,169,110,.9)">01</span><span data-paint="text" data-color="rgba(255,255,255,.62)" data-hover="#ffffff">About</span></a>
+        <a href="#work"><span class="gh-i" data-paint="text" data-color="rgba(200,169,110,.9)">02</span><span data-paint="text" data-color="rgba(255,255,255,.62)" data-hover="#ffffff">Work</span></a>
+        <a href="#stack"><span class="gh-i" data-paint="text" data-color="rgba(200,169,110,.9)">03</span><span data-paint="text" data-color="rgba(255,255,255,.62)" data-hover="#ffffff">Stack</span></a>
+        <a href="#contact"><span class="gh-i" data-paint="text" data-color="rgba(200,169,110,.9)">04</span><span data-paint="text" data-color="rgba(255,255,255,.62)" data-hover="#ffffff">Contact</span></a>
+      </nav>
+      <div class="gh-right">
+        <button class="gh-theme" type="button" data-theme-toggle data-theme-label data-paint="text" data-color="rgba(255,255,255,.62)" data-hover="#ffffff">Dark mode</button>
+        <span class="gh-status"><span class="gh-dot" data-paint="dot" aria-hidden="true"></span><span data-paint="text" data-color="rgba(255,255,255,.55)">Available · Lagos <span data-clock>--:--</span></span></span>
+        <a class="gh-hire" href="#contact" data-paint="pill">Hire me</a>
+      </div>
+    </div>
+
+    <div class="gh-panel" id="ghPanel">
+      <p class="gh-eyebrow" data-paint="text" data-color="rgba(255,255,255,.38)">Frontend developer · Lagos</p>
+      <h1 class="gh-h1"><span class="gh-l" data-paint="grad">Onyekachi</span><span class="gh-l" data-paint="grad">Jeremiah.</span></h1>
+      <p class="gh-sub"><span class="gh-l gh-d" data-paint="text" data-color="rgba(255,255,255,.55)">I build interfaces that perform: 3D, motion-rich and fast enough</span><span class="gh-l gh-d" data-paint="text" data-color="rgba(255,255,255,.55)">to disappear. E-commerce, fintech, media and IoT, worldwide.</span><span class="gh-l gh-m" data-paint="text" data-color="rgba(255,255,255,.55)">I build interfaces that perform:</span><span class="gh-l gh-m" data-paint="text" data-color="rgba(255,255,255,.55)">3D, motion-rich and fast enough</span><span class="gh-l gh-m" data-paint="text" data-color="rgba(255,255,255,.55)">to disappear. E-commerce, fintech,</span><span class="gh-l gh-m" data-paint="text" data-color="rgba(255,255,255,.55)">media and IoT, worldwide.</span></p>
+      <div class="gh-actions">
+        <a class="gh-pill" href="#contact" data-paint="pill">Start a project</a>
+        <button class="gh-read" type="button" id="ghRead" data-paint="text" data-color="#e8e8ec" data-underline="1">What I build →</button>
+      </div>
+      <span class="gh-foot gh-foot-l" data-paint="text" data-color="rgba(255,255,255,.34)">© 2026 Onyekachi Jeremiah</span>
+      <span class="gh-foot gh-foot-r" data-paint="text" data-color="rgba(255,255,255,.34)">Lagos · 6.52° N 3.38° E</span>
+    </div>
   </div>
-  <div class="hero-main">
-    <h1>
-      <span class="first">Onyekachi</span>
-      <span class="last">Jeremiah.</span>
-    </h1>
-    <div class="hero-row">
-      <p class="hero-desc">I build <strong>interfaces that perform</strong> clean, fast, and purposeful. From e-commerce platforms to IoT dashboards, every pixel serves a reason.</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn-outline">View Work</a>
-        <a href="#contact" class="btn-solid">Hire Me →</a>
+
+  <div class="gh-terms" id="ghTerms" aria-hidden="true">
+    <h2 class="gh-terms-title">What I build, in five terms.</h2>
+    <p><b>3D &amp; WebGL</b> — Real-time scenes rendered on the GPU: shaders, glass, particles and walk-through galleries that hold 60fps on a mid-range phone.</p>
+    <p><b>Motion</b> — Scroll choreography with smooth scrolling and spring physics, so every transition feels physical rather than animated.</p>
+    <p><b>Interface</b> — Bespoke components only: custom selects, toasts and glass surfaces. No browser defaults, no templates, every state designed.</p>
+    <p><b>Commerce</b> — Checkout flows wired to Paystack, Shipbubble and Google Auth, built to convert and never drop an order.</p>
+    <p><b>Performance</b> — Lazy media, adaptive resolution and lean builds. The fastest interface is the one you never wait for.</p>
+  </div>
+  <button class="gh-back" id="ghBack" type="button" tabindex="-1">← Back</button>
+
+  <div class="scroll-cue" aria-hidden="true"><span></span>Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>WebGL</span><b>✦</b><span>Three.js</span><b>✦</b><span>GSAP</span><b>✦</b><span>Lenis</span><b>✦</b><span>React</span><b>✦</b><span>PHP</span><b>✦</b><span>WordPress</span><b>✦</b><span>Paystack</span><b>✦</b><span>PWA</span><b>✦</b><span>AI Integration</span><b>✦</b>
+    <span>WebGL</span><b>✦</b><span>Three.js</span><b>✦</b><span>GSAP</span><b>✦</b><span>Lenis</span><b>✦</b><span>React</span><b>✦</b><span>PHP</span><b>✦</b><span>WordPress</span><b>✦</b><span>Paystack</span><b>✦</b><span>PWA</span><b>✦</b><span>AI Integration</span><b>✦</b>
+  </div>
+</div>
+
+<!-- ABOUT — pinned scroll scene: statement scrubs in, 3D card deck rotates through capabilities -->
+<section class="about2" id="about">
+  <div class="ab-pin">
+    <div class="ab-aura" aria-hidden="true"><span class="aura a1"></span><span class="aura a2"></span><span class="aura a3"></span></div>
+    <div class="sec-head"><span class="sec-i">01</span><span class="sec-t">About</span><span class="ab-prog" aria-hidden="true"><i id="abProg"></i></span></div>
+    <div class="ab-grid">
+      <div class="ab-copy">
+        <p class="ab-statement" id="abStatement">Good frontend is invisible. <em>Users never notice it, they just feel it working.</em></p>
+        <p class="ab-bio">I'm <strong>Onyekachi Jeremiah</strong>, a frontend developer in Lagos. I build products where aesthetic clarity meets technical depth: real-time 3D, scroll choreography, payments and logistics, all tuned to load fast on a mid-range phone.</p>
+        <dl class="ab-meta">
+          <div><dt>Based in</dt><dd>Lagos, Nigeria</dd></div>
+          <div><dt>Working</dt><dd>Worldwide · Remote</dd></div>
+          <div><dt>Focus</dt><dd>3D · Motion · Commerce</dd></div>
+        </dl>
+      </div>
+
+      <div class="ab-stage">
+        <div class="ab-deck" id="abDeck">
+
+          <article class="ab-card card"><div class="card-in lg">
+            <div class="abc-top"><span class="abc-n">01 / 04</span><span class="abc-live"><i></i>Live</span></div>
+            <div class="abc-demo demo-cube" aria-hidden="true">
+              <div class="cube-ring"></div>
+              <div class="cube"><span class="f f1"></span><span class="f f2"></span><span class="f f3"></span><span class="f f4"></span><span class="f f5"></span><span class="f f6"></span></div>
+              <div class="cube-shadow"></div>
+            </div>
+            <h3>3D &amp; Motion</h3>
+            <p>WebGL shaders, Three.js scenes and scroll-driven storytelling, locked at 60fps.</p>
+          </div></article>
+
+          <article class="ab-card card"><div class="card-in lg">
+            <div class="abc-top"><span class="abc-n">02 / 04</span><span class="abc-live"><i></i>Live</span></div>
+            <div class="abc-demo demo-ui" aria-hidden="true">
+              <div class="ui-row"><span class="ui-label">Glass mode</span><span class="ui-toggle"><i></i></span></div>
+              <div class="ui-row"><span class="ui-label">Blur</span><span class="ui-slider"><b></b><i></i></span></div>
+              <div class="ui-chips"><span>Spring</span><span class="sel">Bounce</span><span>Ease</span></div>
+              <div class="ui-select"><span>Project type</span><em>3D experience</em><i>⌄</i></div>
+            </div>
+            <h3>Interface Design</h3>
+            <p>Bespoke, mobile-first UI. No defaults, no templates, every state designed.</p>
+          </div></article>
+
+          <article class="ab-card card"><div class="card-in lg">
+            <div class="abc-top"><span class="abc-n">03 / 04</span><span class="abc-live"><i></i>Live</span></div>
+            <div class="abc-demo demo-pay" aria-hidden="true">
+              <div class="pay-head"><span>Order #2041</span><b>₦48,500</b></div>
+              <div class="pay-items"><span>Linen two-piece · M</span><span>Express delivery</span></div>
+              <div class="pay-bar"><i id="payBar"></i></div>
+              <div class="pay-status" id="payStatus">Paying with Paystack…</div>
+              <div class="pay-steps"><span class="on">Pay</span><span>Confirm</span><span>Rider</span><span>Delivered</span></div>
+            </div>
+            <h3>Commerce &amp; APIs</h3>
+            <p>Paystack, Shipbubble, Google Auth and JWT, wired into checkout flows that just work.</p>
+          </div></article>
+
+          <article class="ab-card card"><div class="card-in lg">
+            <div class="abc-top"><span class="abc-n">04 / 04</span><span class="abc-live"><i></i>Live</span></div>
+            <div class="abc-demo demo-ai" aria-hidden="true">
+              <div class="ai-kpi"><span>Revenue · 7d</span><b id="aiKpi">₦1.24M</b><em id="aiDelta">+18%</em></div>
+              <svg class="ai-chart" viewBox="0 0 300 90" preserveAspectRatio="none"><defs><linearGradient id="aiFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".28"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs><path id="aiArea" fill="url(#aiFill)"/><path id="aiLine" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+              <div class="ai-chat"><span class="ai-dot">AI</span><span id="aiMsg">Revenue is up 18% this week.</span></div>
+            </div>
+            <h3>AI &amp; Dashboards</h3>
+            <p>AI integrations, analytics and real-time data for fintech, energy and IoT.</p>
+          </div></article>
+
+        </div>
+        <div class="ab-dots" id="abDots"><button type="button" aria-label="3D and Motion"></button><button type="button" aria-label="Interface Design"></button><button type="button" aria-label="Commerce and APIs"></button><button type="button" aria-label="AI and Dashboards"></button></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- <hr class="divider"> -->
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-pin">
+    <div class="work-head">
+      <div class="sec-head"><span class="sec-i">02</span><span class="sec-t">Selected work</span></div>
+      <h2 class="work-title">Eleven builds. <em>One tunnel.</em></h2>
+      <div class="work-meter" aria-hidden="true"><span class="work-count"><b id="workNow">01</b> / <span id="workTotal">11</span></span><span class="work-bar"><i id="workBar"></i></span></div>
+    </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="sec-label">About</div>
-  <div class="about-grid">
-    <div class="about-left fi">
-      <div class="about-num">OJ</div>
-      <p>I'm <strong>Onyekachi Jeremiah</strong>, a Frontend Developer based in Lagos. I design and build digital products that balance aesthetic clarity with technical depth.</p>
-      <p>My work spans AI integrations and workaround, e-commerce systems, logistics platforms, IoT interfaces, and financial dashboards, always with a focus on mobile and desktop performance and seamless user experience.</p>
-      <p>I care about the details: load times, micro-interactions, API reliability, and the moment a user finds exactly what they need without friction.</p>
-      <div class="skills-list">
-        <div class="skill-row"><span>AI integration</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
-        <div class="skill-row"><span>HTML / CSS / JS</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
-        <div class="skill-row"><span>PHP </span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div></div></div>
-        <div class="skill-row"><span>API Integration</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div></div></div>
-        <div class="skill-row"><span>UI/UX &amp; Figma</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div></div></div>
-        <div class="skill-row"><span> Auth Systems</span><div class="skill-pips"><div class="pip on"></div><div class="pip on"></div><div class="pip on"></div><div class="pip off"></div><div class="pip off"></div></div></div>
-      </div>
+
+    <canvas id="tunnel" aria-hidden="true"></canvas>
+    <div class="tun-hud" aria-hidden="true">
+      <span class="tun-label">Ivory tunnel · selected work</span>
+      <span class="tun-count"><b id="tunCount">01</b> / <span id="tunTotal">11</span></span>
+      <span class="tun-hint">Scroll to walk · Drag to look · Click a panel to open · Esc to exit</span>
     </div>
-    <div class="about-right fi fi-d2">
-      <p class="about-quote">Good frontend is invisible <em>users never notice it, they just feel it working.</em></p>
-      <div class="services-grid">
-        <div class="svc"><div class="svc-icon">⬡</div><div class="svc-title">Interface Design</div><div class="svc-desc">Clean, purposeful UI built mobile-first, accessibility-aware, and pixel-precise.</div></div>
-        <div class="svc"><div class="svc-icon">⤢</div><div class="svc-title">E-commerce Builds</div><div class="svc-desc">Full checkout flows, product galleries, and vendor dashboards with payment & logistics APIs.</div></div>
-        <div class="svc"><div class="svc-icon">◈</div><div class="svc-title">API Integration</div><div class="svc-desc">Shipbubble, PayStack, Google Auth, JWT — connecting frontend to backend reliably.</div></div>
-        <div class="svc"><div class="svc-icon">◎</div><div class="svc-title">Data &amp; Dashboards</div><div class="svc-desc">Analytics interfaces, real-time charts, and reporting tools for logistics and fintech.</div></div>
-      </div>
+    <a class="tun-end btn btn-ink lg lg-dark lg-jelly" href="#contact"><span>Start a project</span><i>→</i></a>
+    <div class="tun-now lg" id="tunNow">
+      <span class="tn-n" id="tunNowN">01</span>
+      <span class="tn-text"><b id="tunNowT">NURIGHT Beauty Parlour</b><small id="tunNowC">Beauty · E-commerce · PWA</small></span>
+      <button type="button" class="btn btn-ink lg lg-dark lg-jelly tn-open" id="tunOpen"><span>Open</span><i>↗</i></button>
     </div>
+
+    <div class="track" id="track">
+
+      <article class="tile" data-n="01">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/work/nuright.webp" alt="NURIGHT Beauty Parlour homepage" width="1200" height="750" loading="lazy" decoding="async"></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">01</span><span class="tile-cat">Beauty · E-commerce · PWA</span></div>
+            <h3>NURIGHT Beauty Parlour</h3>
+            <p>A full platform for a Lagos beauty parlour: a cinematic React + Three.js storefront with scroll-driven frame sequences, service booking, a shop with Paystack checkout and Shipbubble delivery, and an installable admin app with push notifications.</p>
+            <ul class="tags"><li class="hl">React + Three.js</li><li>GSAP · Lenis</li><li class="hl">Paystack</li><li>Shipbubble</li><li>PWA · Push</li></ul>
+            <div class="tile-links"><a href="https://nuright.ng" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="02">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/work/overite.webp" alt="Overite landing page with particle orb" width="1200" height="750" loading="lazy" decoding="async"></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">02</span><span class="tile-cat">Technology · Landing page</span></div>
+            <h3>Overite</h3>
+            <p>The landing page for an African technology ecosystem. An interactive WebGL particle orb that follows your cursor, light and dark themes, a living partner marquee and an ecosystem map, built lean on PHP and vanilla JS.</p>
+            <ul class="tags"><li class="hl">WebGL particles</li><li>PHP</li><li>Vanilla JS</li><li>Light / Dark</li></ul>
+            <div class="tile-links"><a href="https://overite.co" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="03">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/work/urock.webp" alt="URock Media homepage with 3D microphones" width="1200" height="750" loading="lazy" decoding="async"></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">03</span><span class="tile-cat">Media · Magazine · Radio · TV</span></div>
+            <h3>URock Media</h3>
+            <p>A custom WordPress theme for a magazine, radio and TV brand: a 3D microphone hero, a live radio player, editorial layouts for every issue, and a bespoke admin dashboard for the team.</p>
+            <ul class="tags"><li class="hl">Custom WP theme</li><li>PHP</li><li class="hl">3D hero</li><li>Live radio</li><li>Admin</li></ul>
+            <div class="tile-links"><a href="https://urockmagazine.com.ng" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="04">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/work/acg.webp" alt="Advantage Care Group homepage with particle DNA helix" width="1200" height="750" loading="lazy" decoding="async"></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">04</span><span class="tile-cat">Healthcare · Texas, USA</span></div>
+            <h3>Advantage Care Group</h3>
+            <p>The website for a licensed Texas HCS and TxHmL care provider. A GPU-particle DNA helix in Three.js, Lenis smooth scroll, appointment booking, vacancies and a blog, on a zero-dependency static build covered by Playwright tests.</p>
+            <ul class="tags"><li class="hl">Three.js GPU particles</li><li>Lenis</li><li>Static build</li><li>Playwright</li></ul>
+            <div class="tile-links"><a href="https://advantagecg.org/" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="05">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/mamag.webp" alt="MAMAG Store" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/mamag.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">05</span><span class="tile-cat">Clothing · E-commerce</span></div>
+            <h3>MAMAG Store</h3>
+            <p>A high-end clothing store built for scale. Custom PHP backend, an immersive image gallery, cache-busting for instant UI updates, and Paystack for quick checkout.</p>
+            <ul class="tags"><li>PHP</li><li>MySQL</li><li class="hl">Paystack</li><li>Cache optimisation</li></ul>
+            <div class="tile-links"><a href="https://mamagstore.com" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="06">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/mamatee.webp" alt="Mamatee Sauces" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/mamatee.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">06</span><span class="tile-cat">Food · E-commerce</span></div>
+            <h3>Mamatee Sauces</h3>
+            <p>A premium culinary store with high-resolution product galleries, instant UI updates and a streamlined, secure Paystack checkout.</p>
+            <ul class="tags"><li>JS · Tailwind</li><li>MySQL</li><li class="hl">Paystack</li><li>Galleries</li></ul>
+            <div class="tile-links"><a href="https://mamateesauces.com" target="_blank" rel="noopener">Live site <i>↗</i></a><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="07">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/cognitto.webp" alt="Cogitto AI Banking" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/cognitto.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">07</span><span class="tile-cat">AI Fintech · Mobile &amp; Desktop</span></div>
+            <h3>Cogitto AI Banking</h3>
+            <p>A financial interface bridging hardware and digital intelligence through the Home Banking Device: ambient banking with secure, localised processing.</p>
+            <ul class="tags"><li>JavaScript</li><li class="hl">Auth</li><li class="hl">Google Login</li><li>Fintech UI</li></ul>
+            <div class="tile-links"><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="08">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/pdf.webp" alt="PDFarms Online Study" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/pdf.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">08</span><span class="tile-cat">Education · Marketplace</span></div>
+            <h3>PDFarms Online Study</h3>
+            <p>An educational marketplace with a gamified reward system: real-time ticket allocation, automatic raffle entries on enrolment and secure drawing logic.</p>
+            <ul class="tags"><li>JavaScript</li><li class="hl">Raffle engine</li><li>State management</li><li>Real-time</li></ul>
+            <div class="tile-links"><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="09">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/neoscreens.webp" alt="NeoScreens" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/neoscreens.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">09</span><span class="tile-cat">Hardware · Digital billboards</span></div>
+            <h3>NeoScreens</h3>
+            <p>A digital-out-of-home interface for real-time billboard orchestration, with a live inventory dashboard and a geographic view driven by ad performance and screen health.</p>
+            <ul class="tags"><li>PHP</li><li>MySQL</li><li class="hl">Geo visualisation</li><li>Real-time</li></ul>
+            <div class="tile-links"><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="10">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/powerup.webp" alt="PowerUp" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/powerup.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">10</span><span class="tile-cat">Fintech · Electricity payments</span></div>
+            <h3>PowerUp</h3>
+            <p>A real-time energy and fintech dashboard: prepaid and postpaid top-ups, live balance tracking without hardware, transfers and clear usage analytics.</p>
+            <ul class="tags"><li>JavaScript</li><li class="hl">Data viz</li><li>Real-time charts</li><li>Fintech UI</li></ul>
+            <div class="tile-links"><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile" data-n="11">
+        <div class="tile-in lg">
+          <div class="tile-media"><img src="img/poster/vera.webp" alt="Vera smart home" width="1200" height="675" loading="lazy" decoding="async"><video muted loop playsinline preload="none" data-src="video/vera.mp4"></video></div>
+          <div class="tile-body">
+            <div class="tile-top"><span class="tile-n">11</span><span class="tile-cat">IoT · Smart home</span></div>
+            <h3>Vera</h3>
+            <p>A smart home command centre: an AI-integrated IoT dashboard with minimalist controls, real-time automation and voice-responsive interfaces.</p>
+            <ul class="tags"><li>HTML · CSS · JS · PHP</li><li class="hl">AI integration</li><li>IoT</li><li>Voice UI</li></ul>
+            <div class="tile-links"><a href="#contact">Want something similar <i>→</i></a></div>
+          </div>
+          <span class="glare" aria-hidden="true"></span>
+        </div>
+      </article>
+
+      <article class="tile tile-more">
+        <div class="tile-in lg">
+          <div class="more">
+            <span class="more-plus">+</span>
+            <h3>More on request</h3>
+            <p>Client work under NDA, experiments and prototypes. Tell me what you're building and I'll show you what's relevant.</p>
+            <a href="#contact" class="btn btn-ink lg lg-dark lg-jelly magnetic"><span>Get in touch</span><i>→</i></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+    <aside class="tun-card lg" id="tunCard" hidden aria-label="Project details">
+      <div class="tc-top">
+        <span class="tc-n">01 / 11</span>
+        <div class="tc-nav">
+          <button type="button" class="tc-btn tc-prev lg lg-jelly" aria-label="Previous project">←</button>
+          <button type="button" class="tc-btn tc-next lg lg-jelly" aria-label="Next project">→</button>
+          <button type="button" class="tc-btn tc-close lg lg-dark lg-jelly" aria-label="Close project (Esc)">✕</button>
+        </div>
+      </div>
+      <span class="tc-cat"></span>
+      <h3 class="tc-title"></h3>
+      <p class="tc-desc"></p>
+      <ul class="tags tc-tags"></ul>
+      <div class="tile-links tc-links"></div>
+    </aside>
   </div>
 </section>
 
-<hr class="divider">
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="sec-label">Selected work</div>
-
-  <div id="proj-list">
-
-    <!-- 01 MAMAG -->
-    <div class="proj-item">
-      <div class="proj-n">01</div>
-      <div>
-        <div class="proj-cat">Clothing &amp; Lifestyle · E-commerce</div>
-        <div class="proj-title">MAMAG STORE</div>
-        <div class="proj-desc">A high-end clothing e-commerce platform built for scale. Custom PHP backend, advanced image gallery with modern effects and experience, and sophisticated cache-busting scripts for instant UI updates. API integration for quick payment checkout.</div>
-        <div class="proj-tags">
-          <span class="ptag">PHP</span><span class="ptag">MySQL</span>
-          <span class="ptag hl">Paystack API</span>
-          <span class="ptag">Image Gallery</span><span class="ptag">Cache Optimization</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://mamagstore.com" target="_blank" class="plink">Live Site <span class="ar">→</span></a>
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-        <video autoplay muted loop playsinline width="100%">
-          <source src="video/mamag.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
+<!-- STACK — draggable 3D tool sphere + live stats -->
+<section class="stack2" id="stack">
+  <div class="st-aura" aria-hidden="true"></div>
+  <div class="sec-head reveal"><span class="sec-i">03</span><span class="sec-t">Stack &amp; craft</span></div>
+  <div class="st-grid">
+    <div class="st-copy">
+      <h2 class="st-title reveal-words">Built light. <em>Built to last.</em></h2>
+      <p class="st-lead reveal">Every tool earns its place. Drag the sphere to spin through what I build with, from GPU shaders to payment rails. Hover a group to light it up.</p>
+      <ul class="st-legend reveal" id="stLegend">
+        <li data-g="core"><i></i>Core web</li>
+        <li data-g="3d"><i></i>3D &amp; motion</li>
+        <li data-g="back"><i></i>Backend</li>
+        <li data-g="com"><i></i>Commerce &amp; APIs</li>
+        <li data-g="tool"><i></i>Tooling</li>
+      </ul>
     </div>
-
-    <!-- 02 COGITTO -->
-    <div class="proj-item">
-      <div class="proj-n">02</div>
-      <div>
-        <div class="proj-cat">AI FINTECH · Mobile and Desktop </div>
-        <div class="proj-title">Cogitto AI Banking</div>
-        <div class="proj-desc">A sophisticated financial interface bridging the gap between physical hardware and digital intelligence through the <strong>Home Banking Device (HBD)</strong>. This platform merges high-frequency ambient banking with secure, localized processing for a seamless user experience.</div>
-        <div class="proj-tags">
-          <span class="ptag">Javascript</span>
-          <span class="ptag hl">Auth</span>
-          <span class="ptag hl">Google Login</span>
-          <span class="ptag">Mobile-First</span><span class="ptag">Fintech UI</span>
-        </div>
-        <div class="proj-links">
-          <!-- <a href="#" class="plink">Live Site <span class="ar">→</span></a> -->
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-         <video autoplay muted loop playsinline width="100%">
-          <source src="video/cognitto.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
+    <div class="st-orb" id="stOrb">
+      <svg class="st-rings" viewBox="0 0 400 400" aria-hidden="true"><ellipse cx="200" cy="200" rx="190" ry="62"/><ellipse cx="200" cy="200" rx="190" ry="62" transform="rotate(60 200 200)"/><ellipse cx="200" cy="200" rx="190" ry="62" transform="rotate(-60 200 200)"/></svg>
+      <div class="st-core lg" aria-hidden="true"><span>oj</span></div>
+      <ul class="st-tags" id="stTags" aria-label="Tools I use"></ul>
+      <span class="st-hint" aria-hidden="true">Drag to spin</span>
     </div>
+  </div>
 
-    <!-- 03 PDFARMS -->
-    <div class="proj-item">
-      <div class="proj-n">03</div>
-      <div>
-        <div class="proj-cat">Online Courses &amp; Education Chain</div>
-        <div class="proj-title">PDFarms Online Study</div>
-        <div class="proj-desc">A specialized educational marketplace and gamified acquisition system. Real-time ticket allocation and automated raffle entry generation upon course enrollment. Complex backend logic managing multi-tier reward pools, secure drawing algorithms, and user entitlement state across the full learning lifecycle.</div>
-        <div class="proj-tags">
-          <span class="ptag">Javascript</span>
-          <span class="ptag hl">Raffle Engine</span>
-          <span class="ptag">State Management</span>
-          <span class="ptag">Gamification</span><span class="ptag">Real-Time</span>
-        </div>
-        <div class="proj-links">
-          <!-- <a href="#" class="plink">Live App <span class="ar">→</span></a> -->
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-        <video autoplay muted loop playsinline width="100%">
-          <source src="video/pdf.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-    <!-- 04 NEOSCREENS -->
-    <div class="proj-item">
-      <div class="proj-n">04</div>
-      <div>
-        <div class="proj-cat">Hardware &amp; Digital Billboard</div>
-        <div class="proj-title">NeoScreens</div>
-        <div class="proj-desc">A high-performance digital-out-of-home (DOOH) interface for real-time billboard orchestration and asset management. Features a dynamic inventory dashboard with a Javascriptive geographic visualization engine that changes state based on live ad performance and screen health.</div>
-        <div class="proj-tags">
-          <span class="ptag">PHP</span><span class="ptag">MySQL</span>
-          <span class="ptag hl">Geo Visualization</span>
-          <span class="ptag">Asset Management</span><span class="ptag">Real-Time</span>
-        </div>
-        <div class="proj-links">
-          <!-- <a href="https://overite.co/mamag" target="_blank" class="plink">Live Site <span class="ar">→</span></a> -->
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-        <video autoplay muted loop playsinline width="100%">
-          <source src="video/neoscreens.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-
-    <!-- 05 POWERUP -->
-    <div class="proj-item">
-      <div class="proj-n">05</div>
-      <div>
-        <div class="proj-cat">Fintech &amp; Online, Electricity Payment</div>
-        <div class="proj-title">PowerUp</div>
-        <div class="proj-desc">A real-time energy and fintech dashboard. Seamless prepaid and postpaid loading via the dashboard and live balance tracking without hardware, integrated with money transfers and detailed utility analytics for clear consumption insights.</div>
-        <div class="proj-tags">
-          <span class="ptag">JavaScript</span>
-          <span class="ptag hl">Data Visualization</span>
-          <span class="ptag">Real-Time Charts</span>
-          <span class="ptag">Fintech UI</span><span class="ptag">SME</span>
-        </div>
-        <div class="proj-links">
-          <!-- <a href="#" class="plink">Live Demo <span class="ar">→</span></a> -->
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-         <video autoplay muted loop playsinline width="100%">
-          <source src="video/powerup.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-    <!-- 06 VERA -->
-    <div class="proj-item">
-      <div class="proj-n">06</div>
-      <div>
-        <div class="proj-cat">IOT &amp; Automation · Smart Home</div>
-        <div class="proj-title">Vera</div>
-        <div class="proj-desc">A futuristic smart home command center. An AI-integrated IoT dashboard featuring minimalist controls for real-time device automation and voice-responsive interfaces, optimized for seamless connectivity and low-latency performance.</div>
-        <div class="proj-tags">
-          <span class="ptag">HTML / CSS / JS / PHP ...</span>
-          <span class="ptag hl">AI Integration</span>
-          <span class="ptag">IoT</span>
-          <span class="ptag">Voice UI</span>
-        </div>
-        <div class="proj-links">
-          <!-- <a href="#" class="plink">Live Site <span class="ar">→</span></a> -->
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-        <video autoplay muted loop playsinline width="100%">
-          <source src="video/vera.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-    <!-- 07 MAMATEESAUCES -->
-    <div class="proj-item">
-      <div class="proj-n">07</div>
-      <div>
-        <div class="proj-cat">Food &amp; Lifestyle · E-commerce</div>
-        <div class="proj-title">MAMATEESAUCES</div>
-        <div class="proj-desc">A premium culinary e-commerce platform for Mamatee Sauces. Custom PHP backend featuring high-resolution product galleries, instant UI updates via advanced cache-busting scripts, and a streamlined API integration for a fast, secure checkout experience.</div>
-        <div class="proj-tags">
-          <span class="ptag">JS / TAILWINDCSS</span><span class="ptag">MySQL</span>
-          <span class="ptag hl">Paystack API</span>
-          <span class="ptag">Image Gallery</span><span class="ptag">Cache Optimization</span>
-        </div>
-        <div class="proj-links">
-          <a href="https://mamateesauces.com" target="_blank" class="plink">Live Site <span class="ar">→</span></a>
-          <a href="#contact" class="plink">Want Something Similar ? <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img">
-        <video autoplay muted loop playsinline width="100%">
-          <source src="video/mamatee.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>
-    </div>
-
-    <!-- OTHER WORKS -->
-    <div class="proj-item" style="opacity:1;transform:none;">
-      <div class="proj-n" style="-webkit-text-stroke-color:rgba(17,17,16,.06);">+</div>
-      <div>
-        <div class="proj-cat">More work</div>
-        <div class="proj-title" style="font-style:italic;color:var(--ink-3)">Other Projects</div>
-        <div class="proj-desc" style="color:var(--ink-3)">Additional client work, experiments, and builds. Some are under NDA. Reach out directly to discuss scope and timeline.</div>
-        <div class="proj-links">
-          <a href="#contact" class="plink">Get in touch <span class="ar">→</span></a>
-        </div>
-      </div>
-      <div class="proj-img proj-placeholder" style="background:var(--bg-2);display:flex;">
-        <span>On request</span>
-      </div>
-    </div>
-
+  <div class="st-stats">
+    <article class="st-card card reveal"><div class="card-in lg">
+      <span class="stc-k"><i class="stc-pulse"></i>Measured live</span>
+      <b class="stc-num"><span id="fpsNum">60</span><small>fps</small></b>
+      <span class="stc-l">Frames per second on your device, right now. Every animation here is built to hold it.</span>
+      <canvas class="stc-spark" id="fpsSpark" width="300" height="56" aria-hidden="true"></canvas>
+    </div></article>
+    <article class="st-card card reveal" style="--d:.08s"><div class="card-in lg">
+      <span class="stc-k">Zero defaults</span>
+      <b class="stc-num"><span data-count="0">0</span></b>
+      <span class="stc-l">Native alerts or browser widgets. Every message, select and toast is designed.</span>
+      <div class="stc-toast" aria-hidden="true"><b>✓</b><span>Message sent</span></div>
+    </div></article>
+    <article class="st-card card reveal" style="--d:.16s"><div class="card-in lg">
+      <span class="stc-k">Shipped</span>
+      <b class="stc-num"><span data-count="11">0</span></b>
+      <span class="stc-l">Featured builds, from beauty and fashion to fintech, media and billboards.</span>
+      <div class="stc-fan" aria-hidden="true"><img src="img/work/nuright.webp" alt="" loading="lazy" width="120" height="75"><img src="img/work/overite.webp" alt="" loading="lazy" width="120" height="75"><img src="img/work/urock.webp" alt="" loading="lazy" width="120" height="75"><img src="img/work/acg.webp" alt="" loading="lazy" width="120" height="75"><img src="img/poster/mamatee.webp" alt="" loading="lazy" width="120" height="75"></div>
+    </div></article>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
-  <div class="sec-label">Contact</div>
+<section class="contact" id="contact">
+  <div class="contact-glow" aria-hidden="true"></div>
+  <div class="sec-head reveal"><span class="sec-i">04</span><span class="sec-t">Contact</span></div>
   <div class="contact-grid">
-    <div class="fi">
-      <h2 class="contact-h">Let's build something <em>worth using.</em></h2>
-      <p class="contact-sub">Open to freelance, contract, and full-time roles. Whether you need a frontend built from scratch or an existing product improved — let's talk.</p>
-      <a href="mailto:jeremiahluis4life@gmail.com" class="contact-email">jeremiahluis4life@gmail.com</a>
-      <div class="contact-links">
-        <a href="https://wa.me/+2349018654747" target="_blank" class="clink"><span>WhatsApp</span><span class="clink-arr">↗</span></a>
-        <a href="https://www.linkedin.com/in/jerry-luis-55473226b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="clink"><span>LinkedIn</span><span class="clink-arr">↗</span></a>
-        <a href="mailto:jeremiahluis4life@gmail.com" target="_blank" class="clink"><span>Gmail</span><span class="clink-arr">↗</span></a>
-        <!-- <a href="#" class="clink"><span>Download CV</span><span class="clink-arr">↓</span></a> -->
+    <div class="contact-copy">
+      <h2 class="contact-title reveal-words">Let's build something <em>worth using.</em></h2>
+      <p class="contact-sub reveal">Open to freelance, contract and full-time roles. Whether you need a frontend built from scratch or an existing product taken further, let's talk.</p>
+      <a href="mailto:jeremiahluis4life@gmail.com" class="contact-mail reveal">jeremiahluis4life@gmail.com</a>
+      <div class="contact-links reveal">
+        <a href="https://wa.me/2349018654747" target="_blank" rel="noopener"><span>WhatsApp</span><i>↗</i></a>
+        <a href="https://www.linkedin.com/in/jerry-luis-55473226b" target="_blank" rel="noopener"><span>LinkedIn</span><i>↗</i></a>
+        <a href="https://github.com/jeremiahluis4life-ctrl" target="_blank" rel="noopener"><span>GitHub</span><i>↗</i></a>
+        <a href="mailto:jeremiahluis4life@gmail.com"><span>Email</span><i>↗</i></a>
       </div>
     </div>
-    <div class="fi fi-d2">
-      <form action="" id="contactForm">
-        <div class="contact-form">
-          <div class="fg"><label class="flabel">Name</label><input type="text" id="name" name="name" class="finput" placeholder="Your name"></div>
-          <div class="fg"><label class="flabel">Email</label><input type="email" id="email" name="email" class="finput" placeholder="your@email.com"></div>
-          <div class="fg"><label class="flabel">Project Type</label><input type="text" id="project" name="project" class="finput" placeholder="e.g., Website redesign, React app, E-commerce site"></div>
-          <div class="fg"><label class="flabel">Project brief</label><textarea class="ftextarea" id="message" name="message" placeholder="Tell me about your project…"></textarea></div>
-          <button type="submit" class="btn-send">Send Message →</button>
+
+    <form class="form lg lg-ondark reveal" id="contactForm" novalidate>
+      <div class="field"><input type="text" id="name" name="name" placeholder=" " autocomplete="name" required><label for="name">Your name</label></div>
+      <div class="field"><input type="email" id="email" name="email" placeholder=" " autocomplete="email" required><label for="email">Email address</label></div>
+      <div class="field">
+        <input type="hidden" id="project" name="project" value="">
+        <div class="select" id="projSelect">
+          <button type="button" class="select-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="projLabel projValue">
+            <span class="select-label" id="projLabel">Project type</span>
+            <span class="select-value" id="projValue"></span>
+            <i aria-hidden="true">⌄</i>
+          </button>
+          <ul class="select-list lg lg-ondark" role="listbox" tabindex="-1" aria-labelledby="projLabel">
+            <li role="option" aria-selected="false">Website or landing page</li>
+            <li role="option" aria-selected="false">E-commerce store</li>
+            <li role="option" aria-selected="false">3D / WebGL experience</li>
+            <li role="option" aria-selected="false">Dashboard or web app</li>
+            <li role="option" aria-selected="false">Redesign of an existing product</li>
+            <li role="option" aria-selected="false">Something else</li>
+          </ul>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="field"><textarea id="message" name="message" placeholder=" " rows="4" required></textarea><label for="message">Tell me about your project</label></div>
+      <button type="submit" class="btn btn-gold lg lg-gold lg-jelly magnetic send"><span>Send message</span><i>→</i></button>
+    </form>
   </div>
 </section>
-<div id="successPopup">
-    Message sent successfully! Thank you.
-</div>
-<footer>
+
+</main>
+
+<footer class="foot">
   <span>© 2026 Onyekachi Jeremiah</span>
-  <span class="gold">Lagos, Nigeria 🇳🇬</span>
-  <a href="#hero">Back to top ↑</a>
+  <span class="foot-mid">Built in Lagos, for the next century 🇳🇬</span>
+  <a href="#top">Back to top ↑</a>
 </footer>
 
-<script src="script.js"></script>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
 </body>
 </html>
