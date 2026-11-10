@@ -101,7 +101,7 @@ document.getElementById('contactForm').addEventListener('submit', async function
         console.error('Submission error:', error);
         alert('There was an error sending your message. Please try again.');
     } finally {
-        submitButton.textContent = 'Send Message 🚀';
+        submitButton.textContent = 'Send Message →';
         submitButton.disabled = false;
     }
 });
