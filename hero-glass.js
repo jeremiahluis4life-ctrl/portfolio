@@ -25,7 +25,10 @@ async function init() {
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
   } catch { return; }
-  let dprCap = Math.min(devicePixelRatio || 1, 1.6);
+  const phoneDev = Math.min(innerWidth, innerHeight) < 700;
+  // sharp on high-density phone screens; never drops below dprFloor
+  let dprCap = Math.min(devicePixelRatio || 1, phoneDev ? 2.5 : 2);
+  const dprFloor = Math.min(devicePixelRatio || 1, 1.5);
   renderer.setPixelRatio(dprCap);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -116,7 +119,7 @@ async function init() {
   };
   const hovered = new Set();
   const paint = (root, pr, w, h) => {
-    const dpr = Math.max(1.5, Math.min(devicePixelRatio || 1, 2.5));
+    const dpr = Math.max(1.5, Math.min(devicePixelRatio || 1, 3));
     pr.cv.width = Math.max(2, Math.round(w * dpr)); pr.cv.height = Math.max(2, Math.round(h * dpr));
     const x = pr.ctx;
     x.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -353,7 +356,7 @@ void main(){
       fragmentShader: `uniform sampler2D uMap;uniform vec3 uKey;uniform vec3 uRim;uniform float uFade;
 varying vec2 vUv;varying vec3 vN;varying vec3 vV;
 void main(){
-  vec4 c=texture2D(uMap,vUv);
+  vec4 c=texture2D(uMap,vUv,-.6);
   float a=c.a*smoothstep(0.,.14,vUv.y)*uFade;
   if(a<.1)discard;
   vec3 n=normalize(vN),v=normalize(vV),k=normalize(uKey);
@@ -567,7 +570,7 @@ void main(){
     glowU.uGlow.value = glow;
 
     // breathe the cut lines (~45 rebuilds/s)
-    if ((state === 'rest' || state === 'intro') && now - lastBuild > 33) { buildCells(t, false); lastBuild = now; }
+    if ((state === 'rest' || state === 'intro') && now - lastBuild > (lite ? 140 : 33)) { buildCells(t, false); lastBuild = now; }
 
     // per-piece hover springs + flight
     const flying = state === 'out' || state === 'back' || state === 'intro' || state === 'terms' || state === 'leave' || state === 'away';
@@ -655,13 +658,14 @@ void main(){
     if (Math.abs(lt - lightT) > .001) { lightT += (lt - lightT) * (1 - Math.exp(-dt / .18)); if (Math.abs(lt - lightT) < .002) lightT = lt; applyTheme(); }
     renderer.render(scene, camera);
     // adaptive quality: if frames run slow, render fewer pixels
-    if (perfN < 120 && dt > 0 && dt < .1) {
+    // slow device? first drop the costly extras, only then trim resolution (never below dprFloor)
+    if (perfN < 180 && dt > 0 && dt < .1) {
       perfN++; perfAcc += dt;
-      if (perfN === 60 && perfAcc / 60 > .021 && dprCap > 1) { dprCap = 1; renderer.setPixelRatio(1); layout(); }
-      if (perfN === 120 && perfAcc / 120 > .028 && dprCap > .75) { dprCap = .75; renderer.setPixelRatio(.75); layout(); }
+      if (perfN === 60) { if (perfAcc / 60 > .022) lite = true; perfAcc = 0; }
+      if (perfN === 180 && perfAcc / 120 > .024 && dprCap > dprFloor) { dprCap = Math.max(dprFloor, dprCap * .75); renderer.setPixelRatio(dprCap); layout(); }
     }
   };
-  let perfN = 0, perfAcc = 0;
+  let perfN = 0, perfAcc = 0, lite = false;
   hero.classList.add('gh-shattered');      // fly in on load
   state = 'intro'; stateT = 0;
   requestAnimationFrame(frame);
