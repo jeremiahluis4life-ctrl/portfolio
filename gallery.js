@@ -422,7 +422,7 @@ void main(){
       if (nb && bd < 15) ay = -nb.side * Math.atan2(HW * .95, bd) * .8 * clamp((15 - bd) / 7, 0, 1);
     }
     autoYaw = lerp(autoYaw, ay, clamp(k * 1.1, 0, 1));
-    yaw = dragYaw + autoYaw * (1 - fk) - smx * .16 * (1 - fk); pitch = dragPitch - smy * .08 * (1 - fk);
+    yaw = dragYaw + autoYaw * (1 - fk) - smx * .62 * (1 - fk); pitch = dragPitch - smy * .2 * (1 - fk);   // the mouse steers the view
 
     // walking camera
     const fr = frameAt(camS);
