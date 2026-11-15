@@ -27,7 +27,7 @@ async function init() {
   } catch { return; }
   const phoneDev = Math.min(innerWidth, innerHeight) < 700;
   // sharp on high-density phone screens; never drops below dprFloor
-  let dprCap = Math.min(devicePixelRatio || 1, phoneDev ? 2.5 : 2);
+  let dprCap = Math.min(devicePixelRatio || 1, 2);
   const dprFloor = Math.min(devicePixelRatio || 1, 2);
   renderer.setPixelRatio(dprCap);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -327,7 +327,7 @@ async function init() {
   /* ---------------- 3D portrait: photo + hand-modelled depth ---------------- */
   const texLoader = new THREE.TextureLoader();
   const loadTex = url => new Promise(res => texLoader.load(url, res, undefined, () => res(null)));
-  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp?v=20261110c'), loadTex('img/me-depth.webp?v=20261110c')]);
+  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp?v=20261115e'), loadTex('img/me-depth.webp?v=20261115e')]);
   const me = { on: !!(meTex && meDepth), g: new THREE.Group(), show: 0, cx: 0, headY: 0, Hp: 1 };
   const meU = {
     uMap: { value: meTex }, uDepth: { value: meDepth }, uAmp: { value: 100 }, uSize: { value: new THREE.Vector2(1, 1) },
@@ -526,6 +526,7 @@ void main(){
 
   const frame = now => {
     requestAnimationFrame(frame);
+    if (phoneDev && !ptrIn && state === 'rest' && now - last < 30) return;   // 30fps on phones while idle
     const dt = Math.min(.05, (now - last) / 1000); last = now;
     // scroll: scatter when leaving the hero, reassemble on the way back
     const sc = window.__lenis ? window.__lenis.scroll : window.scrollY;
@@ -570,7 +571,7 @@ void main(){
     glowU.uGlow.value = glow;
 
     // breathe the cut lines (~45 rebuilds/s)
-    if ((state === 'rest' || state === 'intro') && now - lastBuild > (lite ? 140 : 33)) { buildCells(t, false); lastBuild = now; }
+    if ((state === 'rest' || state === 'intro') && !phoneDev && now - lastBuild > (lite ? 140 : 50)) { buildCells(t, false); lastBuild = now; }
 
     // per-piece hover springs + flight
     const flying = state === 'out' || state === 'back' || state === 'intro' || state === 'terms' || state === 'leave' || state === 'away';

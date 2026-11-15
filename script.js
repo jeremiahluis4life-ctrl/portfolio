@@ -271,7 +271,6 @@ void main(){
   const work = $('#work'), pin = $('.work-pin'), track = $('#track');
   const tiles = $$('.tile', track);
   const nowEl = $('#workNow'), bar = $('#workBar');
-  $('#workTotal').textContent = String(tiles.filter(t => t.dataset.n).length).padStart(2, '0');
   let wTop = 0, wDist = 0, tileX = [], tileW = 0, trackPad = 0, lastIdx = -1;
 
   const measureWork = () => {
@@ -494,9 +493,9 @@ void main(){
       });
     };
     const queue = () => { if (!queued) { queued = true; requestAnimationFrame(light); } };
-    addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; queue(); }, { passive: true });
+    if (finePointer) addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; queue(); }, { passive: true });   // highlights follow a mouse only
     addEventListener('pointerdown', e => { px = e.clientX; py = e.clientY; queue(); }, { passive: true });
-    addEventListener('scroll', queue, { passive: true });
+    if (finePointer) addEventListener('scroll', queue, { passive: true });
 
     document.addEventListener('pointerdown', e => {
       const el = e.target.closest('.lg-jelly');

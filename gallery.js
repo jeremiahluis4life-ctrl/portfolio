@@ -29,6 +29,7 @@
     tags: [...t.querySelectorAll('.tags li')].map(li => [li.textContent, li.classList.contains('hl')]),
     links: [...t.querySelectorAll('.tile-links a')].map(a => [a.getAttribute('href'), a.textContent.replace(/[↗→]/g, '').trim(), a.target === '_blank']),
     img: $('img', t).getAttribute('src'),
+    vid: t.querySelector('video')?.dataset.src || null,
   }));
   const N = P.length;
 
@@ -48,7 +49,7 @@
   /* ---------- tunnel path + cross-section ---------- */
   const HW = 3.6, HH = 2.4, EXP = 2 / 4.6;           // half width, half height, squircle exponent
   const GAP = 10, S0 = 16;                             // spacing between panels, first panel
-  const PW = 4.3, PH = PW * 720 / 1024;               // panel size (matches texture aspect)
+  const PW = 4.6, PH = PW * 656 / 1024;   // 16:9 picture + caption strip               // panel size (matches texture aspect)
   const SEND = S0 + (N - 1) * GAP + 22;
   const C = s => [Math.sin(s * .041) * 5.5 + Math.sin(s * .017 + 1) * 3, Math.sin(s * .029) * .5, -s];
   const frameAt = s => { const t = norm(sub(C(s + .5), C(s - .5))); const n = norm(cross(t, [0, 1, 0])); return { t, n, b: cross(n, t) }; };
@@ -64,7 +65,7 @@ in vec2 vU;in vec2 vL;in vec3 vW;uniform vec3 uCam;uniform vec3 uBg;uniform floa
 float grid(float x,float k){float w=fwidth(x);float f=abs(fract(x-.5)-.5);return 1.-smoothstep(0.,w*k,f);}
 void main(){
   vec3 base=mix(vec3(.958,.953,.944),vec3(.010,.012,.020),uDark);
-  vec3 lineC=mix(vec3(.52,.52,.55),vec3(.20,.42,1.),uDark);
+  vec3 lineC=mix(vec3(.52,.52,.55),vec3(.46,.35,.17),uDark);
   float floorM=smoothstep(-.86,-.97,vL.y);
   float ceilM=smoothstep(.86,.97,vL.y);
   float gx=grid(vU.x*22.,1.2),gy=grid(vU.y/.92,1.2),gm=grid(vU.y/9.2,1.6);
@@ -72,7 +73,7 @@ void main(){
   float corner=pow(abs(vL.x*vL.y),2.);
   vec3 col=base*(1.-corner*.14);
   col=mix(col,lineC,line*mix(.5,.32,floorM)*(1.-uDark*.4));
-  col+=lineC*line*uDark*(.45+.5*gm);
+  col+=lineC*line*uDark*(.22+.28*gm);
   float ls=mod(vU.y+4.,10.)-5.;
   float lx=(vU.x-.25)*19.;
   vec2 q=vec2(lx/1.25,ls/1.9);
@@ -80,10 +81,10 @@ void main(){
   float inside=step(m,1.)*ceilM;
   float rim=smoothstep(.9,.93,m)*inside;
   float rings=.5+.5*cos(length(vec2(lx,ls*.66))*20.);
-  vec3 lcA=mix(vec3(.99,.97,.9),vec3(.16,.32,.78),uDark);
+  vec3 lcA=mix(vec3(.99,.97,.9),vec3(.40,.30,.13),uDark);
   vec3 lcB=mix(vec3(.42,.4,.36),vec3(.015,.03,.08),uDark);
   col=mix(col,mix(lcA,lcB,smoothstep(.7,1.,rings)*.85),inside);
-  col=mix(col,mix(vec3(.06),vec3(.5,.75,1.),uDark),rim);
+  col=mix(col,mix(vec3(.06),vec3(.7,.56,.32),uDark),rim);
   float d=length(vW-uCam);
   col=mix(col,uBg,smoothstep(10.,62.,d));
   o=vec4(col,mix(1.,mix(.84,.7,uDark),floorM));
@@ -93,11 +94,13 @@ in vec3 aP;in vec2 aU;uniform mat4 uVP;out vec2 vU;out vec3 vW;
 void main(){vU=aU;vW=aP;gl_Position=uVP*vec4(aP,1.);}`;
   const panFS = `#version 300 es
 precision highp float;
-in vec2 vU;in vec3 vW;uniform sampler2D uTex;uniform float uHi;uniform float uRefl;uniform float uDark;uniform float uPlain;uniform float uOp;uniform vec3 uCam;uniform vec3 uBg;out vec4 o;
+in vec2 vU;in vec3 vW;uniform sampler2D uTex;uniform sampler2D uVid;uniform float uUseVid;uniform float uVidA;uniform float uHi;uniform float uRefl;uniform float uDark;uniform float uPlain;uniform float uOp;uniform vec3 uCam;uniform vec3 uBg;out vec4 o;
 void main(){
   vec4 tc=texture(uTex,vec2(vU.x,1.-vU.y));vec3 col=tc.rgb;
+  if(uUseVid>.5){float py=(vU.y-.122)/.878;if(py>0.){vec2 sc=uVidA>1.778?vec2(1.,1.778/uVidA):vec2(uVidA/1.778,1.);vec2 vq=(vec2(vU.x,py)-.5)/sc+.5;
+    col=(vq.x>0.&&vq.x<1.&&vq.y>0.&&vq.y<1.)?texture(uVid,vec2(vq.x,1.-vq.y)).rgb:mix(vec3(.98,.98,.97),vec3(.043,.05,.07),uDark);}}
   float e=min(min(vU.x,1.-vU.x)*1.42,min(vU.y,1.-vU.y));
-  col=mix(col,mix(vec3(.06),vec3(.35,.6,1.),uDark),(1.-smoothstep(.006,.014,e))*(1.-uPlain));
+  col=mix(col,mix(vec3(.06),vec3(.62,.49,.26),uDark),(1.-smoothstep(.006,.014,e))*(1.-uPlain));
   col+=uHi*.18*(1.-smoothstep(0.,.07,e));
   col=mix(col,col*1.04+.02,uHi);
   float d=length(vW-uCam);
@@ -147,7 +150,7 @@ void main(){
   /* ---------- panels ---------- */
   const panels = P.map((p, i) => {
     const s = S0 + i * GAP, side = i % 2 ? -1 : 1, f = frameAt(s), c0 = C(s);
-    const center = add(add(c0, mulS(f.n, side * (HW - .08))), mulS(f.b, .2));
+    const center = add(add(c0, mulS(f.n, side * (HW - .32))), mulS(f.b, .2));
     const ux = side > 0 ? mulS(f.t, -1) : f.t;                    // image x runs left→right for the viewer
     const facing = mulS(f.n, -side);
     const corner = (u, v) => add(center, add(mulS(ux, (u - .5) * PW), mulS(f.b, (v - .5) * PH)));
@@ -189,7 +192,7 @@ void main(){
     const dk = document.documentElement.dataset.theme === 'dark';
     const cv = document.createElement('canvas'); cv.width = 1440; cv.height = 720;
     const x = cv.getContext('2d');
-    const ink = dk ? '#eef0f4' : '#111110', acc = dk ? '#7fb0ff' : '#8a6830', mute = dk ? '#8a90a0' : '#75726a';
+    const ink = dk ? '#eef0f4' : '#111110', acc = dk ? '#dcc08a' : '#8a6830', mute = dk ? '#8a90a0' : '#75726a';
     x.textAlign = 'center'; x.textBaseline = 'middle';
     x.font = '500 30px "Geist Mono", ui-monospace, monospace'; x.fillStyle = acc;
     x.letterSpacing = '8px'; x.fillText('END OF THE TUNNEL', 720, 120); x.letterSpacing = '0px';
@@ -213,22 +216,29 @@ void main(){
 
   /* textures: screenshot + caption strip, drawn once fonts are ready */
   const aniso = gl.getExtension('EXT_texture_filter_anisotropic');
-  const paint = (pn, img) => {
-    const cv = document.createElement('canvas'); cv.width = 1024; cv.height = 720;
-    const x = cv.getContext('2d');
+  const vidTex = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, vidTex);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+  let vidT = 0, vidOwner = null;
+  const paint = (pn, img, live) => {
+    if (!pn.cv) { pn.cv = document.createElement('canvas'); pn.cv.width = 1024; pn.cv.height = 656; }
+    const cv = pn.cv, x = cv.getContext('2d');
+    x.textAlign = 'left';   // canvas is reused: reset state left over from the last paint
     const dk = isDark();
-    pn.img = img || pn.img; img = pn.img;
-    x.fillStyle = dk ? '#0b0d12' : '#fbfaf7'; x.fillRect(0, 0, 1024, 720);
-    if (img) { const sc = Math.max(1024 / img.width, 640 / img.height); x.drawImage(img, (1024 - img.width * sc) / 2, 0, img.width * sc, img.height * sc); }
-    x.fillStyle = dk ? '#0b0d12' : '#fbfaf7'; x.fillRect(0, 640, 1024, 80);
-    x.fillStyle = dk ? 'rgba(90,140,255,.45)' : 'rgba(17,17,16,.12)'; x.fillRect(0, 640, 1024, 2);
+    if (!live) { pn.img = img || pn.img; img = pn.img; }
+    x.fillStyle = dk ? '#0b0d12' : '#fbfaf7'; x.fillRect(0, 0, 1024, 656);
+    if (img) { const iw = img.videoWidth || img.width, ih = img.videoHeight || img.height; const sc = (live ? Math.min : Math.max)(1024 / iw, 576 / ih); x.drawImage(img, (1024 - iw * sc) / 2, (576 - ih * sc) / 2, iw * sc, ih * sc); }   // videos fit whole, stills fill
+    x.fillStyle = dk ? '#0b0d12' : '#fbfaf7'; x.fillRect(0, 576, 1024, 80);
+    x.fillStyle = dk ? 'rgba(214,184,125,.45)' : 'rgba(17,17,16,.12)'; x.fillRect(0, 576, 1024, 2);
     const p = P[pn.i];
-    x.font = '500 22px "Geist Mono", ui-monospace, monospace'; x.fillStyle = dk ? '#7fb0ff' : '#8a6830'; x.textBaseline = 'middle';
-    x.fillText(p.n, 32, 681);
+    x.font = '500 22px "Geist Mono", ui-monospace, monospace'; x.fillStyle = dk ? '#dcc08a' : '#8a6830'; x.textBaseline = 'middle';
+    x.fillText(p.n, 32, 617);
     x.font = '400 38px "Cormorant Garamond", Georgia, serif'; x.fillStyle = dk ? '#eef0f4' : '#111110';
-    x.fillText(p.title, 84, 679);
+    x.fillText(p.title, 84, 615);
     x.font = '500 17px "Geist Mono", ui-monospace, monospace'; x.fillStyle = dk ? '#8a90a0' : '#75726a'; x.textAlign = 'right';
-    x.fillText(p.cat.toUpperCase().slice(0, 40), 992, 681);
+    x.fillText(p.cat.toUpperCase().slice(0, 40), 992, 617);
     gl.bindTexture(gl.TEXTURE_2D, pn.tex);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, cv);
     gl.generateMipmap(gl.TEXTURE_2D);
@@ -251,11 +261,10 @@ void main(){
   work.classList.add('is-3d');
   const elNow = $('#tunNow'), elNowN = $('#tunNowN'), elNowT = $('#tunNowT'), elNowC = $('#tunNowC');
   const elCount = $('#tunCount'), card = $('#tunCard');
-  $('#tunTotal').textContent = String(N).padStart(2, '0');
 
   const fillCard = i => {
     const p = P[i];
-    $('.tc-n', card).textContent = p.n + ' / ' + String(N).padStart(2, '0');
+    $('.tc-n', card).textContent = p.n;
     $('.tc-cat', card).textContent = p.cat;
     $('.tc-title', card).textContent = p.title;
     $('.tc-desc', card).textContent = p.desc;
@@ -447,6 +456,30 @@ void main(){
       elCount.textContent = pp.n;
       elNow.classList.remove('swap'); void elNow.offsetWidth; elNow.classList.add('swap');
     }
+    let vidPn = null;
+    if (texturesStarted) {
+      let bd = 1e9;
+      panels.forEach(pn => { const d = pn.s - camS; if (P[pn.i].vid && !pn.vidFail && d > -3 && d < 8 && Math.abs(d - 2) < bd) { bd = Math.abs(d - 2); vidPn = pn; } });
+      panels.forEach(pn => { if (pn !== vidPn && pn.video && !pn.video.paused) { pn.video.pause(); pn.vidLeft = true; } });
+      if (vidPn) {
+        if (!vidPn.video) {
+          const v = document.createElement('video');
+          v.muted = true; v.loop = true; v.playsInline = true; v.preload = 'auto';
+          v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
+          const pn = vidPn; v.addEventListener('error', () => { pn.vidFail = true; });
+          v.src = P[vidPn.i].vid; vidPn.video = v;
+        }
+        const v = vidPn.video;
+        if (v.paused) { if (vidPn.vidLeft) { v.currentTime = 0; vidPn.vidLeft = false; } v.play().catch(() => {}); }
+        if (v.readyState >= 2 && now - vidT > 40) {
+          vidT = now;
+          gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, vidTex);
+          gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, v);
+          gl.activeTexture(gl.TEXTURE0);
+          vidOwner = vidPn;
+        }
+      }
+    }
     work.classList.toggle('walking', p > .015);
     work.classList.toggle('at-end', p > .93);
 
@@ -459,7 +492,7 @@ void main(){
     gl.uniformMatrix4fv(pan.u.uVP, false, vp);
     gl.uniform3fv(pan.u.uCam, eye); gl.uniform3fv(pan.u.uBg, BG); gl.uniform1f(pan.u.uDark, dark);
     gl.activeTexture(gl.TEXTURE0); gl.uniform1i(pan.u.uTex, 0);
-    gl.uniform1f(pan.u.uRefl, .55); gl.uniform1f(pan.u.uHi, 0); gl.uniform1f(pan.u.uPlain, 0); gl.uniform1f(pan.u.uOp, 1);
+    gl.uniform1f(pan.u.uRefl, .55); gl.uniform1f(pan.u.uHi, 0); gl.uniform1f(pan.u.uPlain, 0); gl.uniform1f(pan.u.uOp, 1); gl.uniform1f(pan.u.uUseVid, 0);
     panels.forEach(pn => { if (Math.abs(pn.s - camS) > 70) return; gl.bindTexture(gl.TEXTURE_2D, pn.tex); gl.bindVertexArray(pn.rvao); gl.drawArrays(gl.TRIANGLES, 0, 6); });
     // 2) tunnel (floor is translucent so reflections show)
     gl.useProgram(tun.p);
@@ -470,11 +503,15 @@ void main(){
     // 3) panels
     gl.useProgram(pan.p);
     gl.uniform1f(pan.u.uRefl, 0);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, vidTex); gl.uniform1i(pan.u.uVid, 1); gl.activeTexture(gl.TEXTURE0);
     panels.forEach(pn => {
       const target = (pn.i === hoverI || pn.i === focusI) ? 1 : 0;
       pn.hi = lerp(pn.hi, target, clamp(k * 3, 0, 1));
       if (Math.abs(pn.s - camS) > 70) return;
       gl.uniform1f(pan.u.uHi, pn.hi);
+      const useV = pn === vidPn && pn === vidOwner;
+      gl.uniform1f(pan.u.uUseVid, useV ? 1 : 0);
+      if (useV) gl.uniform1f(pan.u.uVidA, (pn.video.videoWidth / pn.video.videoHeight) || 1.778);
       gl.bindTexture(gl.TEXTURE_2D, pn.tex); gl.bindVertexArray(pn.vao); gl.drawArrays(gl.TRIANGLES, 0, 6);
     });
     const signOp = clamp((camS - (sEnd - 16)) / 10, 0, 1);

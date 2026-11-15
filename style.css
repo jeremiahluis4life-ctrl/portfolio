@@ -711,7 +711,7 @@ h2 em { color: var(--gold-ink); }
 [data-theme="dark"] .contact, [data-theme="dark"] .foot { background: #0b0c11; }
 [data-theme="dark"] .toast { background: rgba(18,20,26,.85); color: var(--ink); }
 [data-theme="dark"] .marquee-track span { color: var(--ink); }
-[data-theme="dark"] .tun-count b { color: #7fb0ff; }
+[data-theme="dark"] .tun-count b { color: var(--gold-ink); }
 
 /* theme switch (site nav) */
 .theme-btn { position: relative; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; color: var(--ink); }
@@ -948,3 +948,11 @@ h2 em { color: var(--gold-ink); }
 
 /* ---- mobile: keep the About deck inside the screen ---- */
 @media (max-width: 900px) { .about2 { overflow: hidden; } .ab-stage { max-width: 100%; } .ab-card { width: min(340px, 84vw); } }
+
+/* ---- performance: live backdrop blur is the most expensive effect on the page ---- */
+.st-tag { -webkit-backdrop-filter: none; backdrop-filter: none; background: color-mix(in srgb, var(--paper) 88%, transparent); }
+@media (hover: none) {
+  .lg, .glass, .eyebrow, .btn-glass, .mob-menu, .nav.solid, .select-list, .toast { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .lg:not(.lg-dark):not(.lg-gold) { background: color-mix(in srgb, var(--paper) 92%, transparent); }
+  .nav.solid { background: color-mix(in srgb, var(--paper) 94%, transparent); }
+}
