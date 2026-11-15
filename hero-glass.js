@@ -327,7 +327,7 @@ async function init() {
   /* ---------------- 3D portrait: photo + hand-modelled depth ---------------- */
   const texLoader = new THREE.TextureLoader();
   const loadTex = url => new Promise(res => texLoader.load(url, res, undefined, () => res(null)));
-  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp?v=20261115e'), loadTex('img/me-depth.webp?v=20261115e')]);
+  const [meTex, meDepth] = await Promise.all([loadTex('img/me.webp?v=20261115f'), loadTex('img/me-depth.webp?v=20261115f')]);
   const me = { on: !!(meTex && meDepth), g: new THREE.Group(), show: 0, cx: 0, headY: 0, Hp: 1 };
   const meU = {
     uMap: { value: meTex }, uDepth: { value: meDepth }, uAmp: { value: 100 }, uSize: { value: new THREE.Vector2(1, 1) },
